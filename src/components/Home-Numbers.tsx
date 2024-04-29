@@ -19,25 +19,21 @@ export default function Numbers() {
         const handleScroll = () => {
 
             if (siswaRef.current) {
-                const siswaRect = siswaRef.current.getBoundingClientRect();
+                const siswaRect = siswaRef.current!.getBoundingClientRect();
                 const isSiswaVisible = (
                     siswaRect.top >= 0 &&
-                    // siswaRect.left >= 0 &&
                     siswaRect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-                    // siswaRect.right <= (window.innerWidth || document.documentElement.clientWidth)
                 );
-                setSiswaIsVisible(isSiswaVisible);
+                if (isSiswaVisible) setSiswaIsVisible(true);
             }
 
             if (mahasiswaRef.current) {
-               const mahasiswaRect = mahasiswaRef.current.getBoundingClientRect();
+               const mahasiswaRect = mahasiswaRef.current!.getBoundingClientRect();
                 const isMahasiswaVisible = (
                     mahasiswaRect.top >= 0 &&
-                    // mahasiswaRect.left >= 0 &&
                     mahasiswaRect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
-                    // mahasiswaRect.right <= (window.innerWidth || document.documentElement.clientWidth)
                 );
-                setMahasiswaIsVisible(isMahasiswaVisible);
+                if (isMahasiswaVisible) setMahasiswaIsVisible(true);
             }
         };
 
