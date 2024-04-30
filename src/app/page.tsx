@@ -1,10 +1,10 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import Hero from "../components/Home-Hero";
-import Numbers from "../components/Home-Numbers";
-import Reviews from "../components/Home-Reviews";
-import Footer from "../components/Footer";
+import Hero from "../modules/Home-Hero";
+import Numbers from "../modules/Home-Numbers";
+import Reviews from "../modules/Home-Reviews";
+import Footer from "../modules/Footer";
 
 export default function Home() {
 //   const user = useAppSelector((state) => state.user);
