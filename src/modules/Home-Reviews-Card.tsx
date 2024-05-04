@@ -16,7 +16,7 @@ export default function ReviewCard({photo, university, review, name, major} : Re
             <div className='relative p-[32px] overflow-hidden'>
                 <Image src={university} className='absolute ml-[225px] mt-[-90px]' alt='University Icon' width={200} height={200} />
                 <div className="text-[color:var(--Darkest-Blue,#1A202C)] text-5xl italic font-bold leading-[48px] font-family: Poppins;">
-                    "
+                    &quot;
                 </div>
                 <div className="text-[color:var(--Darkest-Blue,#1A202C)] text-base not-italic font-medium leading-[150%] font-family: Poppins">
                     {review}
