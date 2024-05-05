@@ -1,14 +1,14 @@
-import ReviewCard from "./Home-Reviews-Card"
+import ReviewCard from "./Reviews-Card"
 
-import profileDummy from '../assets/profile-pict-dummy.svg';
-import uiIcon from '../assets/ui-icon.svg';
-import ugmIcon from '../assets/ugm-icon.svg';
-import itbIcon from '../assets/itb-icon.svg';
+import profileDummy from '../../assets/svg/profile-pict-dummy.svg';
+import uiIcon from '../../assets/svg/ui-icon.svg';
+import ugmIcon from '../../assets/svg/ugm-icon.svg';
+import itbIcon from '../../assets/svg/itb-icon.svg';
 
 const reviewer = [
-    { profile: profileDummy, university: itbIcon, review: 'MATCHMAJOR membantu saya menemukan passion dalam Teknik Informatika. Dengan chat langsung bersama mahasiswa-mahasiswa yang sudah berada di jurusan ini, saya semakin yakin dan nyaman dengan pilihan jurusan saya', name: 'Bulan', major: 'Informatika - Institut Teknologi Bandung'},
+    { profile: profileDummy, university: itbIcon, review: 'MATCHMAJOR membantu saya menemukan passion dalam Teknik Informatika. Dengan chat langsung bersama mahasiswa-mahasiswa yang sudah berada di jurusan ini, saya semakin yakin dan nyaman dengan pilihan jurusan saya.', name: 'Bulan', major: 'Informatika - Institut Teknologi Bandung'},
     { profile: profileDummy, university: ugmIcon, review: 'Saya sangat bersyukur menemukan MATCHMAJOR. Melalui platform ini, saya dapat berinteraksi langsung dengan mahasiswa Ilmu Komunikasi. Mereka membantu saya memahami lebih dalam tentang lingkungan akademik dan materi kuliah di jurusan ini.', name: 'Azmy', major: 'Ilmu Komunikasi - Universitas Gadjah Mada'},
-    { profile: profileDummy, university: uiIcon, review: 'MATCHMAJOR membantu saya menemukan passion dalam Teknik Informatika. Dengan chat langsung bersama mahasiswa-mahasiswa yang sudah berada di jurusan ini, saya semakin yakin dan nyaman dengan pilihan jurusan saya.', name: 'Fathan', major: 'Psikologi - Universitas Indonesia' }
+    { profile: profileDummy, university: uiIcon, review: 'MATCHMAJOR membantu saya menemukan passion dalam Teknik Informatika. Dengan chat langsung bersama mahasiswa-mahasiswa yang sudah berada di jurusan ini, saya semakin yakin dan nyaman dengan pilihan jurusan saya.', name: 'Fathan', major: 'Psikologi - Universitas Indonesia' },
 ];
 
 export default function Reviews() {

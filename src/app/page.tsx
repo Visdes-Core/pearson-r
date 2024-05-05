@@ -1,9 +1,9 @@
 "use client";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import Hero from "../modules/Home-Hero";
-import Numbers from "../modules/Home-Numbers";
-import Reviews from "../modules/Home-Reviews";
+import Hero from "../modules/HomeModule/Hero";
+import Numbers from "../modules/HomeModule/Numbers";
+import Reviews from "../modules/HomeModule/Reviews";
 import Footer from "../modules/Footer";
 
 export default function Home() {
