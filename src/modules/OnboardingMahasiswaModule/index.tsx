@@ -25,8 +25,8 @@ function OnboardingMahasiswaModule() {
     setInterests(interests.filter((_, index) => index !== indexToRemove));
   };
   return (
-    <div className="flex min-h-screen justify-center items-center text-[#243F73] bg-[#F8F8F8]">
-        <div className="text-black flex flex-col w-[80%] text-[#243F73] min-h-[75vh]">
+    <div className="flex min-h-screen justify-center items-center text-[#243F73] bg-[#F8F8F8] py-10">
+        <div className="text-black flex flex-col w-full md:w-[80%] text-[#243F73] min-h-[75vh]">
         <div className="text-3xl flex justify-center md:justify-start items-center w-full h-full">
             <p>
                 MATCH <br /> <span className="font-bold">MAJOR</span>
@@ -124,15 +124,15 @@ function OnboardingMahasiswaModule() {
                     <div className="w-full flex flex-col gap-5">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="namaOrganisasi">Nama Organisasi</label>
-                            <input type="text" id="namaOrganisasi" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="BEM FISIP UI"/>
+                            <input type="text" id="namaOrganisasi" className="w-full p-2 border text-sm rounded-lg font-normal px-3" placeholder="BEM FISIP UI"/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="jabatan">Jabatan</label>
-                            <input type="text" id="jabatan" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Ketua Departemen Seni dan Budaya"/>
+                            <input type="text" id="jabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" placeholder="Ketua Departemen Seni dan Budaya"/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="masaJabatan">Masa Jabatan</label>
-                            <input type="text" id="masaJabatan" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="2022 - 2023"/>
+                            <input type="text" id="masaJabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" placeholder="2022 - 2023"/>
                         </div>
                         <div className="w-full flex justify-end">
                             <Button>
@@ -152,17 +152,17 @@ function OnboardingMahasiswaModule() {
                     <div className="w-full flex flex-col gap-5">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="namaPrestasi">Nama Prestasi</label>
-                            <input type="text" id="namaPrestasi" className="w-full p-2 border rounded-lg font-normal px-3"
+                            <input type="text" id="namaPrestasi" className="w-full p-2 border text-sm rounded-lg font-normal px-3"
                              placeholder="Juara 1 Hackathon FindIT"/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="tahun">Tahun</label>
-                            <input type="text" id="tahun" className="w-full p-2 border rounded-lg font-normal px-3"
+                            <input type="text" id="tahun" className="w-full p-2 border text-sm rounded-lg font-normal px-3"
                              placeholder="2024"/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="deskripsi">Deskripsi</label>
-                            <textarea id="deskripsi" className="w-full p-2 border rounded-lg font-normal px-3"
+                            <textarea id="deskripsi" className="w-full p-2 border text-sm rounded-lg font-normal px-3"
                              placeholder="Membuat aplikasi MatchMajor sebagai solusi pelajar yang takut salah jurusan"/>
                         </div>
                         <div className="w-full flex justify-end">
