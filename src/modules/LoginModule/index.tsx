@@ -5,7 +5,8 @@ import { Button } from "@/components/button";
 function LoginModule() {
     const router = useRouter()
 
-    return <div className="text-black flex justify-between w-[80%] text-[#243F73] min-h-[75vh]">
+    return (
+    <div className="text-black flex justify-between w-[80%] text-[#243F73] min-h-[75vh]">
       <div className="text-3xl w-[40%] hidden md:flex">
         <div className="bg-[#E4EDFF] flex justify-center items-center w-full h-full">
           <p>
@@ -32,7 +33,7 @@ function LoginModule() {
           <p className="mt-5">Belum punya akun?  <span onClick={() => {router.push('/signup')}} className="text-[#3469C8] cursor-pointer hover:underline">Register</span></p>
         </div>
       </div>
-    </div>;
+    </div>);
 }
 
 export default LoginModule;
