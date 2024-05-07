@@ -13,7 +13,7 @@ export default function Home() {
     const user = window.localStorage.getItem('token');
 
     if (user) {
-      route.push("/onboarding");
+      route.push("/"); //temporarily
     }
   }, []);
 

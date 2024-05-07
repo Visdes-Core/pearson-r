@@ -17,7 +17,7 @@ function LoginModule() {
         })
         .then(function (response) {
             window.localStorage.setItem('token', response.data.token);
-            router.push('/') // temporarily
+            router.push('/onboarding') // temporarily
             console.log(response.data);
         })
         .catch(function (error) {
