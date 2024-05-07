@@ -1,10 +1,10 @@
+import { Button } from "@/components/button";
 import  { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import axios from "axios";
 
 function SignUpModule() {
     const router = useRouter()
-
     const [usernameValue, setUsernameValue] = useState('');
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
