@@ -7,14 +7,15 @@ import Reviews from "@/modules/HomeModule/Reviews";
 import Footer from "@/modules/Footer";
 
 export default function Home() {
-  const user = window.localStorage.getItem('token');
   const route = useRouter();
 
   useEffect(() => {
+    const user = window.localStorage.getItem('token');
+
     if (user) {
-    //   route.push("/dashboard");
+      route.push("/onboarding");
     }
-  }, [user]);
+  }, []);
 
   return (
     <main className="flex min-h-screen flex-col items-stretch bg-[#F8F8F8]">
