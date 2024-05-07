@@ -18,13 +18,13 @@ export default function ReviewCard({photo, university, review, name, major} : Re
                 <div className="text-[color:var(--Darkest-Blue,#1A202C)] text-5xl italic font-bold leading-[48px] font-family: Poppins;">
                     &quot;
                 </div>
-                <div className="text-[color:var(--Darkest-Blue,#1A202C)] text-base not-italic font-medium leading-[150%] font-family: Poppins">
+                <div className="text-[color:var(--Darkest-Blue,#1A202C)] text-base not-italic font-medium leading-[150%] font-family: Poppins relative">
                     {review}
                 </div>
             </div>
 
             <div className="flex w-full items-center h-[69px] flex-row bg-[#F0F0F0] gap-[12px] pl-[28px] rounded-b-xl">
-                <Image src={photo} alt='Location Icon' width={40} height={40} />
+                <Image src={photo} alt='Location Icon' width={40} height={40}/>
                 <div className='flex flex-col gap-[4px]'>
                     <div className='text-[color:var(--Darkest-Blue,#1A202C)] text-xs not-italic font-medium leading-[normal] font-family: Poppins;'>
                         {name}
