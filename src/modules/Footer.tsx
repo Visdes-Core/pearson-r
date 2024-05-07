@@ -1,11 +1,11 @@
 import Image from 'next/image';
 
-import locationIcon from '../assets/location-icon.svg';
-import igIcon from '../assets/ig-icon.svg';
-import xIcon from '../assets/x-icon.svg';
-import linkedinIcon from '../assets/linkedin-icon.svg';
-import lineIcon from '../assets/line-icon.svg';
-import mediumIcon from '../assets/medium-icon.svg';
+import locationIcon from '../assets/svg/location-icon.svg';
+import igIcon from '../assets/svg/ig-icon.svg';
+import xIcon from '../assets/svg/x-icon.svg';
+import linkedinIcon from '../assets/svg/linkedin-icon.svg';
+import lineIcon from '../assets/svg/line-icon.svg';
+import mediumIcon from '../assets/svg/medium-icon.svg';
 
 const icons = [
   { src: igIcon, alt: 'Ig Icon', width: 24, height: 24 },

@@ -11,12 +11,12 @@ interface ReviewCardProps {
 
 export default function ReviewCard({photo, university, review, name, major} : ReviewCardProps){
     return (
-        <div className="relative flex w-[392px] flex-col justify-center items-start bg-[#8EB5EB] rounded-xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] overflow-hidden">
+        <div className="relative flex w-[392px] flex-col justify-between items-start bg-[#8EB5EB] rounded-xl shadow-[0px_0px_10px_0px_rgba(0,0,0,0.25)] overflow-hidden">
 
             <div className='relative p-[32px] overflow-hidden'>
                 <Image src={university} className='absolute ml-[225px] mt-[-90px]' alt='University Icon' width={200} height={200} />
                 <div className="text-[color:var(--Darkest-Blue,#1A202C)] text-5xl italic font-bold leading-[48px] font-family: Poppins;">
-                    "
+                    &quot;
                 </div>
                 <div className="text-[color:var(--Darkest-Blue,#1A202C)] text-base not-italic font-medium leading-[150%] font-family: Poppins relative">
                     {review}

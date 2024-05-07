@@ -1,9 +1,9 @@
 import Image from 'next/image'
 
-import cardIllustration from '../assets/card-illustration.svg'
+import cardIllustration from '../../assets/svg/card-illustration.svg'
 
-import siswaIcon from '../assets/siswa-icon.svg'
-import mahasiswaIcon from '../assets/mahasiswa-icon.svg'
+import siswaIcon from '../../assets/svg/siswa-icon.svg'
+import mahasiswaIcon from '../../assets/svg/mahasiswa-icon.svg'
 import CountUp from "react-countup";
 import { useEffect, useRef, useState } from 'react';
 
