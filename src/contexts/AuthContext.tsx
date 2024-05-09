@@ -11,9 +11,10 @@ import {
   
   import { useRouter } from "next/navigation"
   import Cookies from "js-cookie"
+  import { jwtDecode } from "jwt-decode"
   
   type AuthContextValue = {
-    token: String
+    userId: String
     login: (data: {
       email: String
       password: String
@@ -32,7 +33,7 @@ import {
   export const useAuthContext = () => useContext(AuthContext)
   
   export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-    const [token, setToken] = useState<String>("")
+    const [userId, setUserId] = useState<String>("")
     const router = useRouter()
   
     const login = async (data: {
@@ -46,8 +47,10 @@ import {
         .then(function (response) {
             Cookies.set("token", response.data.token)
 
-            setToken(response.data.token)
-            console.log(response.data);
+            const decodedToken = jwtDecode<{ userId: string }>(response.data.token);
+
+            setUserId(decodedToken.userId)
+            console.log(decodedToken.userId)
 
             router.push('/onboarding')
         })
@@ -76,25 +79,24 @@ import {
         });
     }
 
-    useEffect(() => {
-        const tokenFromCookie = Cookies.get("token");
-
-        if (tokenFromCookie) {
-            setToken(tokenFromCookie);
-        } else {
-            // Redirect to login page if token is not found
-            router.push("/login");
-        }
-        
-      }, []);
-
     const logout = () => {
-        setToken("")
+        setUserId("")
         Cookies.remove("token")
     }
+
+    useEffect(() => {
+        const token = Cookies.get("token")
+
+        if (!token || token === "undefined") {
+            throw new Error()
+        } else {
+            const decodedToken = jwtDecode<{ userId: string }>(token);
+            setUserId(decodedToken.userId)
+        }
+    }),[]
   
     const value = {
-      token,
+      userId,
       login,
       signup,
       logout

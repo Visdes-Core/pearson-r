@@ -1,14 +1,13 @@
 "use client";
 
-import { useAuthContext } from "@/contexts/AuthContext";
+import { AuthWrapperContextProvider } from "@/contexts/AuthWrapperContext";
+import ProfileModule from "@/modules/ProfileModule";
 
-export default function SignUp() {
-
-    const { token } = useAuthContext();
+export default function Profile() {
 
   return (
-    <div className="flex min-h-screen justify-center items-center bg-[#F8F8F8] text-[#000000]">
-      {token}
-    </div>
+    <AuthWrapperContextProvider>
+        <ProfileModule/>
+    </AuthWrapperContextProvider>
   );
 }
