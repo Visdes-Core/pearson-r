@@ -19,7 +19,7 @@ function OnboardingModule() {
 
   return (
   <div className="flex min-h-screen justify-center items-center bg-[#F8F8F8]">
-    <div className="text-black flex flex-col w-[80%] text-[#243F73] min-h-[75vh]">
+    <div className="text-black flex flex-col w-[80%] text-blue-900 min-h-[75vh]">
         <div className="text-3xl flex justify-center md:justify-start items-center w-full h-full">
             <p>
                 MATCH <br /> <span className="font-bold">MAJOR</span>

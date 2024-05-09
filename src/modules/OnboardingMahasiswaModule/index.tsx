@@ -1,10 +1,41 @@
 import { Button } from "@/components/button";
 import Link from "next/link";
 import React, { useState } from "react";
-import ModalOrganisasi from "./module-elements/ModalOrganisasi";
+import { OrganisasiInterface, PrestasiInterface } from "./interface";
 
 function OnboardingMahasiswaModule() {
   const [interests, setInterests] = useState<string[]>([])
+
+  /** ORGANISASI STATE */
+  const [organisasiList, setOrganisasiList] = useState<OrganisasiInterface[]>([])
+  const [organisasi, setOrganisasi] = useState<string>('')
+  const [masaJabatan, setMasaJabatan] = useState<string>('')
+  const [jabatan, setJabatan] = useState<string>('')
+  const handleSubmitOrg = () => {
+    const org = {
+      organisasi,
+      masaJabatan,
+      jabatan
+    }
+    setOrganisasiList([...organisasiList, org]);
+    setShown('')
+  }
+  
+  /** PENCAPAIAN STATE */
+  const [prestasiList, setPrestasiList] = useState<PrestasiInterface[]>([])
+  const [prestasi, setPrestasi] = useState<string>('')
+  const [tahun, setTahun] = useState<string>('')
+  const [deskripsi, setDeskripsi] = useState<string>('')
+  const handleSubmitPrestasi = () => {
+    const achievement = {
+      prestasi,
+      tahun,
+      deskripsi
+    }
+    setPrestasiList([...prestasiList, achievement]);
+    setShown('')
+  }
+
   const [isShown, setShown] = useState('')
 
   const toggleModalOrganisasi = () => {
@@ -25,8 +56,8 @@ function OnboardingMahasiswaModule() {
     setInterests(interests.filter((_, index) => index !== indexToRemove));
   };
   return (
-    <div className="flex min-h-screen justify-center items-center text-[#243F73] bg-[#F8F8F8] py-10">
-        <div className="text-black flex flex-col w-full md:w-[80%] text-[#243F73] min-h-[75vh]">
+    <div className="flex min-h-screen justify-center items-center text-blue-800 bg-[#F8F8F8] py-10">
+        <div className="text-black flex flex-col w-full md:w-[80%] text-blue-900 min-h-[75vh]">
         <div className="text-3xl flex justify-center md:justify-start items-center w-full h-full">
             <p>
                 MATCH <br /> <span className="font-bold">MAJOR</span>
@@ -76,10 +107,10 @@ function OnboardingMahasiswaModule() {
             </div>
             <div className="flex gap-2 flex-wrap">
                 {interests.map((major, index) => (
-                    <div key={index} className="bg-[#3469C8] flex gap-3 w-max py-2 px-4 text-md text-white font-medium rounded-2xl"
-                    onClick={() => removeInterest(index)}>
+                    <div key={index} className="bg-[#3469C8] hover:bg-[#243f73] flex gap-3 w-max py-2 px-4 text-md text-white font-medium rounded-3xl">
                         <span>{major}</span>
-                        <span className="hover:cursor-pointer">
+                        <span className="hover:cursor-pointer hover:bg-white px-2 rounded-xl hover:text-blue-700"
+                        onClick={() => removeInterest(index)}>
                             X
                         </span>
                     </div>
@@ -91,6 +122,12 @@ function OnboardingMahasiswaModule() {
                     <p className="text-blue-800 text-2xl hover:cursor-pointer"
                     onClick={toggleModalOrganisasi}>+</p>
                 </div>
+                {organisasiList.map((org, index) => (
+                    <div key={index} className="w-full flex flex-col border-t-2 py-2 font-medium">
+                        <p className="text-sm text-blue-700">{org.organisasi}</p>
+                        <p className="text-xs text-gray-500">{org.jabatan} | {org.masaJabatan}</p>
+                    </div>
+                ))}
             </div>
             <div className="flex flex-col px-3 bg-white rounded-md border p-2">
                 <div className="flex justify-between w-full items-center">
@@ -98,6 +135,13 @@ function OnboardingMahasiswaModule() {
                     <p className="text-blue-800 text-2xl hover:cursor-pointer"
                     onClick={toggleModalPencapaian}>+</p>
                 </div>
+                {prestasiList.map((prestasi, index) => (
+                    <div key={index} className="w-full flex flex-col border-t-2 py-2 font-medium">
+                        <p className="text-sm text-blue-700">{prestasi.prestasi}</p>
+                        <p className="text-xs text-gray-500">{prestasi.tahun}</p>
+                        <p className="text-xs text-gray-500">{prestasi.deskripsi}</p>
+                    </div>
+                ))}
             </div>
             <div className="flex justify-end w-full">
                 <Link href={'/'}>
@@ -124,18 +168,25 @@ function OnboardingMahasiswaModule() {
                     <div className="w-full flex flex-col gap-5">
                         <div className="flex flex-col gap-2">
                             <label htmlFor="namaOrganisasi">Nama Organisasi</label>
-                            <input type="text" id="namaOrganisasi" className="w-full p-2 border text-sm rounded-lg font-normal px-3" placeholder="BEM FISIP UI"/>
+                            <input type="text" id="namaOrganisasi" className="w-full p-2 border text-sm rounded-lg font-normal px-3" 
+                            placeholder="BEM FISIP UI" 
+                            onChange={(e) => {setOrganisasi(e.target.value)}}/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="jabatan">Jabatan</label>
-                            <input type="text" id="jabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" placeholder="Ketua Departemen Seni dan Budaya"/>
+                            <input type="text" id="jabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" 
+                            placeholder="Ketua Departemen Seni dan Budaya"
+                            onChange={(e) => {setJabatan(e.target.value)}}
+                            />
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="masaJabatan">Masa Jabatan</label>
-                            <input type="text" id="masaJabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" placeholder="2022 - 2023"/>
+                            <input type="text" id="masaJabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" 
+                            placeholder="2022 - 2023"
+                            onChange={(e) => {setMasaJabatan(e.target.value)}}/>
                         </div>
                         <div className="w-full flex justify-end">
-                            <Button>
+                            <Button onClick={handleSubmitOrg}>
                                 Tambah
                             </Button>
                         </div>
@@ -153,20 +204,23 @@ function OnboardingMahasiswaModule() {
                         <div className="flex flex-col gap-2">
                             <label htmlFor="namaPrestasi">Nama Prestasi</label>
                             <input type="text" id="namaPrestasi" className="w-full p-2 border text-sm rounded-lg font-normal px-3"
-                             placeholder="Juara 1 Hackathon FindIT"/>
+                             placeholder="Juara 1 Hackathon FindIT"
+                             onChange={(e) => {setPrestasi(e.target.value)}}/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="tahun">Tahun</label>
                             <input type="text" id="tahun" className="w-full p-2 border text-sm rounded-lg font-normal px-3"
-                             placeholder="2024"/>
+                             placeholder="2024"
+                             onChange={(e) => {setTahun(e.target.value)}}/>
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="deskripsi">Deskripsi</label>
                             <textarea id="deskripsi" className="w-full p-2 border text-sm rounded-lg font-normal px-3"
-                             placeholder="Membuat aplikasi MatchMajor sebagai solusi pelajar yang takut salah jurusan"/>
+                             placeholder="Membuat aplikasi MatchMajor sebagai solusi pelajar yang takut salah jurusan"
+                             onChange={(e) => {setDeskripsi(e.target.value)}}/>
                         </div>
                         <div className="w-full flex justify-end">
-                            <Button>
+                            <Button onClick={handleSubmitPrestasi}>
                                 Tambah
                             </Button>
                         </div>
