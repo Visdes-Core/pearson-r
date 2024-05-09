@@ -25,16 +25,16 @@ type OnboardingContextValue = {
         jurusan: String
         minat: String[]
         organisasi: {
-            nama_organisasi : String
+            organisasi : String
             jabatan : String
-            mulai_masa_jabatan : String
-            akhir_masa_jabatan : String
+            awalMasaJabatan : String
+            akhirMasaJabatan : String
         }[]
         pencapaian: {
-            nama_pencapaian: String
+            prestasi: String
             tahun: String
             deskripsi: String
-        }
+        }[]
     }) => void
 }
 
@@ -83,16 +83,16 @@ export const OnboardingContextProvider = ({ children }: { children: ReactNode })
         jurusan: String
         minat: String[]
         organisasi: {
-            nama_organisasi : String
+            organisasi : String
             jabatan : String
-            mulai_masa_jabatan : String
-            akhir_masa_jabatan : String
+            awalMasaJabatan : String
+            akhirMasaJabatan : String
         }[]
         pencapaian: {
-            nama_pencapaian: String
+            prestasi: String
             tahun: String
             deskripsi: String
-        }
+        }[]
     }) => {
         const body = {
             nama : data.nama,

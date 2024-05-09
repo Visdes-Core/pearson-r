@@ -2,20 +2,28 @@ import { Button } from "@/components/button";
 import Link from "next/link";
 import React, { useState } from "react";
 import { OrganisasiInterface, PrestasiInterface } from "./interface";
+import { useOnboardingContext } from "@/contexts/OnboardingContext";
 
 function OnboardingMahasiswaModule() {
   const [interests, setInterests] = useState<string[]>([])
 
+  const [nameValue, setNameValue] = useState('');
+  const [asalUniversitasValue, setAsalUniversitasValue] = useState('');
+  const [angkatanValue, setAngkatanValue] = useState('');
+  const [jurusanValue, setJurusanValue] = useState('');
+
   /** ORGANISASI STATE */
   const [organisasiList, setOrganisasiList] = useState<OrganisasiInterface[]>([])
   const [organisasi, setOrganisasi] = useState<string>('')
-  const [masaJabatan, setMasaJabatan] = useState<string>('')
+  const [awalMasaJabatan, setAwalMasaJabatan] = useState<string>('')
+  const [akhirMasaJabatan, setAkhirMasaJabatan] = useState<string>('')
   const [jabatan, setJabatan] = useState<string>('')
   const handleSubmitOrg = () => {
     const org = {
       organisasi,
-      masaJabatan,
-      jabatan
+      jabatan,
+      awalMasaJabatan,
+      akhirMasaJabatan,
     }
     setOrganisasiList([...organisasiList, org]);
     setShown('')
@@ -55,6 +63,9 @@ function OnboardingMahasiswaModule() {
   const removeInterest = (indexToRemove: number) => {
     setInterests(interests.filter((_, index) => index !== indexToRemove));
   };
+
+  const { roleMahasiswa } = useOnboardingContext();
+
   return (
     <div className="flex min-h-screen justify-center items-center text-blue-800 bg-[#F8F8F8] py-10">
         <div className="text-black flex flex-col w-full md:w-[80%] text-blue-900 min-h-[75vh]">
@@ -65,18 +76,24 @@ function OnboardingMahasiswaModule() {
         </div>
         <div className="md:px-6 w-full md:w-3/5 py-10 mx-auto flex flex-col items-center justify-center">
           <h2 className="font-bold text-center text-2xl mb-10">Lengkapin profil kamu dulu yuk!</h2>
-          <form action="" className="w-4/5 flex flex-col gap-5 font-semibold">
+          <form onSubmit={ e => {e.preventDefault() ; roleMahasiswa({nama : nameValue,
+            asal_universitas : asalUniversitasValue,
+            angkatan : angkatanValue,
+            jurusan : jurusanValue,
+            minat: interests,
+            organisasi: organisasiList,
+            pencapaian: prestasiList})}} className="w-4/5 flex flex-col gap-5 font-semibold">
             <div className="flex flex-col gap-2">
               <label htmlFor="nama">Nama</label>
-              <input type="text" id="nama" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Nama"/>
+              <input onChange={e => { setNameValue(e.currentTarget.value); }} type="text" id="nama" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Nama"/>
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="univ">Asal Universitas</label>
-              <input type="text" id="univ" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Asal Universitas"/>
+              <input onChange={e => { setAsalUniversitasValue(e.currentTarget.value); }}type="text" id="univ" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Asal Universitas"/>
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="angkatan">Angkatan</label>
-              <select name="angkatan" id="angkatan" className="w-full p-2 border rounded-lg font-normal px-3">
+              <select onChange={e => { setAngkatanValue(e.currentTarget.value); }} name="angkatan" id="angkatan" className="w-full p-2 border rounded-lg font-normal px-3">
                 <option value="">Pilih</option>
                 <option value="2023">2023</option>
                 <option value="2022">2022</option>
@@ -86,7 +103,7 @@ function OnboardingMahasiswaModule() {
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="jurusan">Jurusan</label>
-              <select name="jurusan" id="jurusan" className="w-full p-2 border rounded-lg font-normal px-3" defaultValue={""}>
+              <select onChange={e => { setJurusanValue(e.currentTarget.value); }} name="jurusan" id="jurusan" className="w-full p-2 border rounded-lg font-normal px-3" defaultValue={""}>
                 <option value="">Pilih Jurusan</option>
                 <option value="Ilmu Komputer">Ilmu Komputer</option>
                 <option value="Sistem Informasi">Sistem Informasi</option>
@@ -125,7 +142,7 @@ function OnboardingMahasiswaModule() {
                 {organisasiList.map((org, index) => (
                     <div key={index} className="w-full flex flex-col border-t-2 py-2 font-medium">
                         <p className="text-sm text-blue-700">{org.organisasi}</p>
-                        <p className="text-xs text-gray-500">{org.jabatan} | {org.masaJabatan}</p>
+                        <p className="text-xs text-gray-500">{org.jabatan} | {org.awalMasaJabatan} - {org.akhirMasaJabatan}</p>
                     </div>
                 ))}
             </div>
@@ -144,11 +161,9 @@ function OnboardingMahasiswaModule() {
                 ))}
             </div>
             <div className="flex justify-end w-full">
-                <Link href={'/'}>
                     <Button>
                         Simpan
                     </Button>
-                </Link>
             </div>
           </form>
         </div>
@@ -180,10 +195,16 @@ function OnboardingMahasiswaModule() {
                             />
                         </div>
                         <div className="flex flex-col gap-2">
-                            <label htmlFor="masaJabatan">Masa Jabatan</label>
-                            <input type="text" id="masaJabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" 
-                            placeholder="2022 - 2023"
-                            onChange={(e) => {setMasaJabatan(e.target.value)}}/>
+                            <label htmlFor="masaJabatan">Awal Masa Jabatan</label>
+                            <input type= "number" id="masaJabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" 
+                            placeholder="2022"
+                            onChange={(e) => {setAwalMasaJabatan(e.target.value)}}/>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            <label htmlFor="masaJabatan">Akhir Masa Jabatan</label>
+                            <input type= "number" id="masaJabatan" className="w-full p-2 border text-sm rounded-lg font-normal px-3" 
+                            placeholder="2023"
+                            onChange={(e) => {setAkhirMasaJabatan(e.target.value)}}/>
                         </div>
                         <div className="w-full flex justify-end">
                             <Button onClick={handleSubmitOrg}>
@@ -209,7 +230,7 @@ function OnboardingMahasiswaModule() {
                         </div>
                         <div className="flex flex-col gap-2">
                             <label htmlFor="tahun">Tahun</label>
-                            <input type="text" id="tahun" className="w-full p-2 border text-sm rounded-lg font-normal px-3"
+                            <input type= "number" id="tahun" className="w-full p-2 border text-sm rounded-lg font-normal px-3"
                              placeholder="2024"
                              onChange={(e) => {setTahun(e.target.value)}}/>
                         </div>
