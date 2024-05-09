@@ -1,9 +1,29 @@
+import axios from "axios";
+import { log } from "console";
 import { useRouter } from "next/navigation";
-import React from "react";
 import { Button } from "@/components/button";
+import React, { useState } from "react";
 
 function LoginModule() {
     const router = useRouter()
+    
+    const [emailValue, setEmailValue] = useState('');
+    const [passwordValue, setPasswordValue] = useState('');
+
+    const login = () => {
+        axios.post(process.env.NEXT_PUBLIC_URL + '/auth/login', {
+            email: emailValue,
+            password: passwordValue
+        })
+        .then(function (response) {
+            window.localStorage.setItem('token', response.data.token);
+            router.push('/') // temporarily
+            console.log(response.data);
+        })
+        .catch(function (error) {
+            console.log(error.response.data);
+        });
+    }
 
     return (
     <div className="text-black flex justify-between w-[80%] text-[#243F73] min-h-[75vh]">
@@ -17,14 +37,14 @@ function LoginModule() {
       <div className="w-full md:w-[55%] flex flex-col items-center md:justify-center">
         <div className="md:px-6 w-11/12 flex flex-col items-center justify-center">
           <h2 className="font-bold text-2xl mb-10">Masuk</h2>
-          <form action="" className="w-full flex flex-col gap-5 font-semibold">
+          <form onSubmit={e => {e.preventDefault() ; login()}} className="w-full flex flex-col gap-5 font-semibold">
             <div className="flex flex-col gap-2">
-              <label htmlFor="username">Username</label>
-              <input type="text" id="username" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Username"/>
+                <label htmlFor="email">Email</label>
+                <input onChange={e => { setEmailValue(e.currentTarget.value); }} type="text" id="email" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Email"/>
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="password">Password</label>
-              <input type="password" id="password" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Password"/>
+              <input onChange={e => { setPasswordValue(e.currentTarget.value); }} type="password" id="password" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Password"/>
             </div>
             <Button>
               Masuk
