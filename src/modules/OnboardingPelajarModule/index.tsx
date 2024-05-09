@@ -28,11 +28,11 @@ function OnboardingPelajarModule() {
           <form action="" className="w-4/5 flex flex-col gap-5 font-semibold">
             <div className="flex flex-col gap-2">
               <label htmlFor="nama">Nama</label>
-              <input type="text" id="nama" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Nama"/>
+              <input required type="text" id="nama" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Nama"/>
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="kelas">Kelas</label>
-              <select name="kelas" id="kelas" className="w-full p-2 border rounded-lg font-normal px-3">
+              <select required name="kelas" id="kelas" className="w-full p-2 border rounded-lg font-normal px-3">
                 <option value="">Pilih</option>
                 <option value="12">12</option>
                 <option value="11">11</option>
@@ -42,7 +42,7 @@ function OnboardingPelajarModule() {
             </div>
             <div className="flex flex-col gap-2">
               <label htmlFor="jurusan">Preferensi Jurusan</label>
-              <select name="jurusan" id="jurusan" className="w-full p-2 border rounded-lg font-normal px-3"
+              <select required name="jurusan" id="jurusan" className="w-full p-2 border rounded-lg font-normal px-3"
               onChange={handleSelectChange} defaultValue={""}>
                 <option value="">Pilih Jurusan</option>
                 <option value="Ilmu Komputer">Ilmu Komputer</option>
