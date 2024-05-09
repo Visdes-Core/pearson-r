@@ -1,7 +1,7 @@
 import { Button } from "@/components/button";
 import  { useRouter } from "next/navigation";
 import React, { useState } from "react";
-import axios from "axios";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 function SignUpModule() {
     const router = useRouter()
@@ -10,20 +10,7 @@ function SignUpModule() {
     const [passwordValue, setPasswordValue] = useState('');
     const [reenterPasswordValue, setReenterPasswordValue] = useState('');
 
-    const signup = () => {
-        axios.post(process.env.NEXT_PUBLIC_URL + '/auth/signup', {
-            email: emailValue,
-            password: passwordValue,
-            reenter_password: reenterPasswordValue
-        })
-        .then(function (response) {
-            router.push('/login')
-            console.log(response.data);
-        })
-        .catch(function (error) {
-            console.log(error.response.data);
-        });
-    }
+    const { signup } = useAuthContext();
 
     return <div className="text-black flex justify-between w-[80%] text-blue-900 min-h-[75vh]">
         <div className="text-3xl w-[40%] hidden md:flex">
@@ -36,7 +23,7 @@ function SignUpModule() {
         <div className="w-full md:w-[55%] flex flex-col items-center justify-center">
         <div className="md:px-6 w-11/12 flex flex-col items-center justify-center">
             <h2 className="font-bold text-2xl mb-10">Daftar</h2>
-            <form onSubmit={e => {e.preventDefault() ; signup()}} className="w-full flex flex-col gap-5 font-semibold">
+            <form onSubmit={e => {e.preventDefault() ; signup({username: usernameValue, email: emailValue, password: passwordValue, confirmPassword: reenterPasswordValue})}} className="w-full flex flex-col gap-5 font-semibold">
                 <div className="flex flex-col gap-2">
                     <label htmlFor="email">Email</label>
                     <input onChange={e => { setEmailValue(e.currentTarget.value); }} type="text" id="email" className="w-full p-2 border rounded-lg font-normal px-3" placeholder="Email"/>
