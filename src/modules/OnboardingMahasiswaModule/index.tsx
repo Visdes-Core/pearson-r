@@ -56,8 +56,8 @@ function OnboardingMahasiswaModule() {
     setInterests(interests.filter((_, index) => index !== indexToRemove));
   };
   return (
-    <div className="flex min-h-screen justify-center items-center text-[#243F73] bg-[#F8F8F8] py-10">
-        <div className="text-black flex flex-col w-full md:w-[80%] text-[#243F73] min-h-[75vh]">
+    <div className="flex min-h-screen justify-center items-center text-blue-800 bg-[#F8F8F8] py-10">
+        <div className="text-black flex flex-col w-full md:w-[80%] text-blue-900 min-h-[75vh]">
         <div className="text-3xl flex justify-center md:justify-start items-center w-full h-full">
             <p>
                 MATCH <br /> <span className="font-bold">MAJOR</span>

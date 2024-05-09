@@ -26,7 +26,7 @@ function LoginModule() {
     }
 
     return (
-    <div className="text-black flex justify-between w-[80%] text-[#243F73] min-h-[75vh]">
+    <div className="text-black flex justify-between w-[80%] text-blue-900 min-h-[75vh]">
       <div className="text-3xl w-[40%] hidden md:flex">
         <div className="bg-[#E4EDFF] flex justify-center items-center w-full h-full">
           <p>
