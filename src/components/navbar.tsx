@@ -2,9 +2,18 @@ import React from "react";
 import Link from "next/link";
 
 import { UUID } from "crypto";
+import Cookies from "js-cookie"
 
+import { useRouter } from "next/navigation"
 
 function NavBar({userId} : {userId : UUID}) {
+
+    const router = useRouter()
+
+    const logout = () => {
+        Cookies.remove("token")
+        router.push('/login')
+    }
 
     return (
 
@@ -23,7 +32,9 @@ function NavBar({userId} : {userId : UUID}) {
                     <button>Profile</button>
                 </Link>
             </div>
-            <p className='font-semibold text-red-500'>Log out</p>
+            <div onClick={logout} className="cursor-pointer">
+                <p className='font-semibold text-red-500'>Log out</p>
+            </div>
         </section>
     );
 }

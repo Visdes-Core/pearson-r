@@ -5,11 +5,12 @@ import { useProfileContext } from '@/contexts/ProfileContext';
 import profile from '../../assets/svg/profile-dummy.svg'
 import Image from 'next/image'
 import { Button } from "@/components/button";
+import { UUID } from 'crypto';
 
 
 function ProfileModule() {
 
-    const { isLoading, user } = useProfileContext();
+    const { isLoading, user, questions, upVote} = useProfileContext();
     const { userId  } = useAuthContext();
 
     const LoadingSpinner = () => {
@@ -112,6 +113,28 @@ function ProfileModule() {
                                 <div key={index}>{item.jabatan} - {item.nama_organisasi}</div>
                             ))}
                         </div>
+                    </div>
+
+                    <div className='flex flex-row w-[60%] items-center justify-between'>
+                        <p className='text-[color:var(--Dark-Blue,#243F73)] text-3xl not-italic font-bold leading-[normal] tracking-[0.6px];font-family: Poppins;'>QNA Forum</p>
+                    </div>
+
+                    <div className='flex flex-col w-[100%] justify-between rounded-[20px] items-center gap-[16px] px-[49px] py-[25px]'>  
+                        {questions.map((item: { id : UUID, pertanyaan: string, upvote : string}, index: number) => (
+                            <div className='flex w-[60%] items-center justify-between bg-[#efefef] p-[16px] rounded-[10px] justify-between'> 
+                            
+                                {item.pertanyaan}
+                                <div className='flex flex-row items-center gap-[16px] font-bold'>
+                                    <Button onClick={() => upVote ({questionId : item.id})}>
+                                        Upvote
+                                    </Button>
+                                    <Button onClick={() => upVote ({questionId : item.id})}>
+                                        Upvote
+                                    </Button>
+                                    {item.upvote}
+                                </div>
+                            </div>
+                        ))}
                     </div>
                 </>
             ) : null}
