@@ -1,5 +1,7 @@
 'use client'
 import React, { useEffect, useState } from "react";
+import {Send} from 'lucide-react'
+import Link from "next/link";
 
 function ChatModule() {
     const [showChat, setShowChat] = useState(false)
@@ -13,7 +15,9 @@ function ChatModule() {
         <p className="text-3xl">MATCH<br/><span className='font-bold'>MAJOR</span></p>
         <div className="flex gap-32">
           <button className='font-semibold'>Pesan</button>
-          <button>Match</button>
+          <Link href={'/matching'}>
+            <button>Match</button>
+          </Link>
           <button>Profil</button>
         </div>
         <p className='font-semibold text-red-500'>Log out</p>
@@ -57,7 +61,9 @@ function ChatModule() {
             </div>
             <div className="flex-none p-5 flex w-full items-center gap-5">
                 <input type="text" className="rounded-xl bg-white text-black w-full p-3" placeholder="Ketik pesan..."/>
-                <div className="bg-blue-900 w-12 h-12 rounded-xl"></div>
+                <div className="bg-blue-900 text-white p-3 rounded-xl hover:-translate-y-1 hover:bg-blue-800/[0.8] duration-200 hover:cursor-pointer">
+                  <Send />
+                </div>
             </div>
         </div>
       </section>
