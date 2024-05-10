@@ -11,7 +11,7 @@
   import { UUID } from "crypto"
   import Cookies from "js-cookie"
   import axios from "axios"
-  
+
   type ProfileContextValue = {
     isLoading : boolean
     user : any

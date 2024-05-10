@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import {
     useState,
     createContext,
@@ -12,7 +12,7 @@ import {
   import { useRouter } from "next/navigation"
   import Cookies from "js-cookie"
   import { jwtDecode } from "jwt-decode"
-import { UUID } from "crypto"
+  import { UUID } from "crypto"
   
   type AuthContextValue = {
     userId: UUID
