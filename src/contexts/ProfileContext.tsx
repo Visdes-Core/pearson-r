@@ -15,6 +15,8 @@
   type ProfileContextValue = {
     isLoading : boolean
     user : any
+    questions : any
+    upVote : (data: { questionId: UUID;}) => Promise<void>
   }
   
   const ProfileContext = createContext({} as ProfileContextValue)
@@ -27,6 +29,7 @@
     const userId : UUID = searchParams.get('id') as UUID;
     
     const [user, setUser] = useState(null)
+    const [questions, setQuestions] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
   
     const fetchUser = async (data: {
@@ -41,10 +44,23 @@
             }
         ).then (function (response) {
             setUser(response.data);
-            setIsLoading(false)
         })
     }
 
+    const fetchQuestions = async (data: {
+        userId : UUID
+    }) => {
+        await axios.get(
+            process.env.NEXT_PUBLIC_URL + `/question/${data.userId}`,
+            {
+            headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+            }
+        ).then (function (response) {
+            setQuestions(response.data);
+        })
+    }
 
     const roleCheck = async () => {
 
@@ -63,15 +79,31 @@
         return role
     }
 
+    const upVote = async (data: {
+        questionId : UUID
+    }) => {
+        await axios.get(
+            process.env.NEXT_PUBLIC_URL + `/question/upvote/${data.questionId}`,
+            {
+            headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+            }
+        )
+    }
+
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const role = await roleCheck(); // Call roleCheck to get the role
+                const role = await roleCheck();
                 if (role === 'unenrolled') {
                     router.push(`/onboarding`);
                 } else {
-                    fetchUser({userId: userId});
+                    await fetchQuestions({userId: userId})
+                    await fetchUser({userId: userId})
+                    setIsLoading(false)
                 }
+
             } catch (error) {
                 console.error("Error fetching user data:", error);
             }
@@ -79,11 +111,13 @@
     
         fetchData();
     }, []);
-    
+    console.log(questions)
 
     const value = {
       isLoading,
-      user
+      user,
+      questions,
+      upVote
     }
   
     return <ProfileContext.Provider value={value}>{children}</ProfileContext.Provider>

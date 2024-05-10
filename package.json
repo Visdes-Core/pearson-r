@@ -12,6 +12,7 @@
     "@react-spring/web": "^9.7.3",
     "axios": "^1.6.8",
     "clsx": "^2.1.1",
+    "gsap": "^3.12.5",
     "js-cookie": "^3.0.5",
     "jwt-decode": "^4.0.0",
     "lucide-react": "^0.378.0",
@@ -23,6 +24,7 @@
     "react-tinder-card": "^1.6.4",
     "react-toastify": "^10.0.5",
     "tailwind-merge": "^2.3.0"
+    "tweakpane": "^4.0.3"
   },
   "devDependencies": {
     "@types/js-cookie": "^3.0.6",
