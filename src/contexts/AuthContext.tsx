@@ -1,4 +1,4 @@
-'use client'
+"use client"
 import {
     useState,
     createContext,
@@ -12,7 +12,7 @@ import {
   import { useRouter } from "next/navigation"
   import Cookies from "js-cookie"
   import { jwtDecode } from "jwt-decode"
-import { UUID } from "crypto"
+  import { UUID } from "crypto"
   
   type AuthContextValue = {
     userId: UUID
@@ -81,17 +81,6 @@ import { UUID } from "crypto"
         setUserId("00000000-0000-0000-0000-000000000000")
         Cookies.remove("token")
     }
-
-    useEffect(() => {
-        const token = Cookies.get("token")
-
-        if (!token || token === "undefined") {
-            throw new Error()
-        } else {
-            const decodedToken = jwtDecode<{ userId: UUID }>(token);
-            setUserId(decodedToken.userId)
-        }
-    }),[]
   
     const value = {
       userId,
