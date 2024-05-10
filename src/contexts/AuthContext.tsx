@@ -51,9 +51,7 @@ import { UUID } from "crypto"
             const decodedToken = jwtDecode<{ userId: UUID }>(response.data.token);
 
             setUserId(decodedToken.userId)
-            console.log(decodedToken.userId)
-
-            router.push('/onboarding')
+            router.push(`/profile?id=${decodedToken.userId}`)
         })
         .catch(function (error) {
             console.log(error);
@@ -73,7 +71,6 @@ import { UUID } from "crypto"
         })
         .then(function (response) {
             router.push('/login')
-            console.log(response.data);
         })
         .catch(function (error) {
             console.log(error);

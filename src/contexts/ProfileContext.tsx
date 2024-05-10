@@ -23,15 +23,16 @@
   
   export const ProfileContextProvider = ({ children }: { children: ReactNode }) => {
     const searchParams = useSearchParams()
+    const router = useRouter()
     const userId : UUID = searchParams.get('id') as UUID;
     
     const [user, setUser] = useState(null)
     const [isLoading, setIsLoading] = useState(true)
   
-    const fetchUser = (data: {
+    const fetchUser = async (data: {
         userId : UUID
     }) => {
-        axios.get(
+        await axios.get(
             process.env.NEXT_PUBLIC_URL + `/user/get/${data.userId}`,
             {
             headers: {
@@ -44,9 +45,41 @@
         })
     }
 
+
+    const roleCheck = async () => {
+
+        let role = ''
+        await axios.get(
+            process.env.NEXT_PUBLIC_URL + `/role/rolecheck`,
+            {
+            headers: {
+                Authorization: `Bearer ${Cookies.get("token")}`,
+            },
+            }
+        ).then (function (response) {
+            role = response.data.role;
+        })
+
+        return role
+    }
+
     useEffect(() => {
-        fetchUser({userId : userId});
+        const fetchData = async () => {
+            try {
+                const role = await roleCheck(); // Call roleCheck to get the role
+                if (role === 'unenrolled') {
+                    router.push(`/onboarding`);
+                } else {
+                    fetchUser({userId: userId});
+                }
+            } catch (error) {
+                console.error("Error fetching user data:", error);
+            }
+        };
+    
+        fetchData();
     }, []);
+    
 
     const value = {
       isLoading,
