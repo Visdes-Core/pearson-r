@@ -1,10 +1,11 @@
 export interface OrganisasiInterface {
-    organisasi: string;
-    masaJabatan: string;
-    jabatan: string;
+    nama_organisasi : String
+    jabatan : String
+    mulai_masa_jabatan : String
+    akhir_masa_jabatan : String
 }
 export interface PrestasiInterface {
-    prestasi: string;
-    tahun: string;
-    deskripsi: string;
+    nama_pencapaian: String
+    tahun: String
+    deskripsi: String
 }

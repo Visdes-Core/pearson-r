@@ -19,10 +19,10 @@ export default function Home() {
 
   return (
     <main className="flex min-h-screen flex-col items-stretch bg-[#F8F8F8]">
-      <Hero />
-      <Numbers />
-      <Reviews />
-      <Footer />
+        <Hero />
+        <Numbers />
+        <Reviews />
+        <Footer />
     </main>
   );
 }

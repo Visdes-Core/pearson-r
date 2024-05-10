@@ -5,18 +5,6 @@ import { useRouter } from "next/navigation";
 import React, { useEffect } from "react";
 
 function OnboardingModule() {
-    
-    const route = useRouter();
-
-    useEffect(() => {
-        const user = window.localStorage.getItem('token');
-
-        if (!user) {
-            route.push("/login");
-        }
-
-    }, []);
-
   return (
   <div className="flex min-h-screen justify-center items-center bg-[#F8F8F8]">
     <div className="text-black flex flex-col w-[80%] text-blue-900 min-h-[75vh]">
