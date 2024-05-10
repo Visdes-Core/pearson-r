@@ -39,6 +39,11 @@ Berikut adalah fitur-fitur unggulan yang terdapat dalam aplikasi MatchMajor
 - **Chat** : Fitur diskusi 1-on-1 untuk memberikan kesempatan pelajar berkonsultasi lebih dalam dengan mahasiswa
 - **QnA Forum** : Pada halaman profil mahasiswa, terdapat forum tanya jawab terbuka bagi pelajar untuk bertanya secara anonim.
 
+## Demo
+Jelajahi MatchMajor lebih jauh melalui video demonstrasi aplikasi di bawah ini.
+[Video Demonstrasi](https://drive.google.com/file/d/1UZ28Tn2xCVx3x28At11U38ZqKYA7Mc9_/view?usp=sharing)
+[Website MatchMajor](https://matchmajor.vercel.app/)
+
 ## Contact
 
 Untuk pertanyaan dan informasi lebih lanjut, mohon hubungi anggota [Tim Visdes Core](#team-visdes-core).
