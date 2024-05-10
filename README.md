@@ -23,11 +23,7 @@
   - [Team](#team-visdes-core)
   - [Introduction](#introduction)
   - [Features](#features)
-  - [Contributing](#contributing)
-  - [Usage](#usage)
   - [Contact](#contact)
-
----
 
 ## Introduction
 
