@@ -6,10 +6,14 @@ import axios from 'axios';
 import { MahasiswaType, UserType } from './interface';
 import { ToastContainer, toast } from 'react-toastify';
 import { UserRoundCheck } from 'lucide-react';
+import NavBar from '@/components/navbar';
+import { useAuthContext } from '@/contexts/AuthContext';
 
 function MatchingModule() {
   const [lastDirection, setLastDirection] = useState<string>()
   const [users, setUsers] = useState<UserType[]>([]);
+
+  const { userId  } = useAuthContext();
   
   const notify = (swipedUsername: string) => toast.info("You swiped " + swipedUsername + "!", {
     icon: ({theme, type}) =>  <UserRoundCheck />
@@ -42,21 +46,11 @@ function MatchingModule() {
     console.log(name + ' left the screen!')
   }
   return (
-    <div className='flex flex-col text-black w-full px-10 text-blue-900'>
-      <div className="flex justify-between items-center mb-24 text-lg">
-        <p>MATCH<br/><span className='font-bold'>MAJOR</span></p>
-        <div className="flex gap-32">
-          <Link href={'/chat'}>
-            <button>Pesan</button>
-          </Link>
-          <button className='font-semibold'>Match</button>
-          <Link href={'/profil'}>
-            <button>Profil</button>
-          </Link>
-        </div>
-        <p className='font-semibold text-red-500'>Log out</p>
-      </div>
-      <div className="flex justify-center">
+    <div className='flex flex-col items-center text-black w-full px-10 text-blue-900'>
+        <NavBar userId={userId}></NavBar>
+
+      
+      <div className="flex justify-center mt-[128px]">
         {users.map((user: UserType, index) => (
           <TinderCard
             key={index}

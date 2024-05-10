@@ -121,7 +121,7 @@ function ProfileModule() {
 
                     <div className='flex flex-col w-[100%] justify-between rounded-[20px] items-center gap-[16px] px-[49px] py-[25px]'>  
                         {questions.map((item: { id : UUID, pertanyaan: string, upvote : string}, index: number) => (
-                            <div className='flex w-[60%] items-center justify-between bg-[#efefef] p-[16px] rounded-[10px] justify-between'> 
+                            <div key={index} className='flex w-[60%] items-center justify-between bg-[#efefef] p-[16px] rounded-[10px] justify-between'> 
                             
                                 {item.pertanyaan}
                                 <div className='flex flex-row items-center gap-[16px] font-bold'>
