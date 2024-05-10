@@ -84,12 +84,12 @@ import {
 
     useEffect(() => {
         const token = Cookies.get("token")
-
-        if (token || token !== "undefined") {
-            const decodedToken = jwtDecode<{ userId: UUID }>(token!);
+    
+        if (token && token !== "undefined") {
+            const decodedToken = jwtDecode<{ userId: UUID }>(token);
             setUserId(decodedToken.userId)
         }
-    }),[]
+    }, [])
   
     const value = {
       userId,

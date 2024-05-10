@@ -2,6 +2,8 @@
 import React, { useEffect, useState } from "react";
 import {Send} from 'lucide-react'
 import Link from "next/link";
+import NavBar from "@/components/navbar";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 function ChatModule() {
     const [showChat, setShowChat] = useState(false)
@@ -9,21 +11,13 @@ function ChatModule() {
     const username = "azmynaufal"
     const secret = "juara1finditUGM"
 
-  return (
-    <div className='h-screen flex flex-col justify-start text-black w-full pt-10 px-10 mx-10 text-blue-900'>
-      <section className="flex justify-between items-center mb-10 text-lg">
-        <p className="text-3xl">MATCH<br/><span className='font-bold'>MAJOR</span></p>
-        <div className="flex gap-32">
-          <button className='font-semibold'>Pesan</button>
-          <Link href={'/matching'}>
-            <button>Match</button>
-          </Link>
-          <button>Profil</button>
-        </div>
-        <p className='font-semibold text-red-500'>Log out</p>
-      </section>
+    const { userId  } = useAuthContext();
 
-      <section className="h-full flex bg-[#F8F8F8] rounded-t-xl overflow-hidden">
+  return (
+    <div className='h-screen flex flex-col justify-start items-center w-full px-10 mx-10 text-blue-900'>
+        <NavBar userId={userId}></NavBar>
+
+      <section className="h-full w-full flex bg-[#F8F8F8] rounded-t-xl overflow-hidden">
         <div className="bg-blue-950 w-1/3 h-full text-white">
             <div className="p-5 flex items-center gap-5 bg-blue-300/[0.5] relative">
                 <div className="bg-black w-12 h-12 rounded-[50%]"></div>

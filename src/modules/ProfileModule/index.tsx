@@ -28,7 +28,7 @@ function ProfileModule() {
       console.log(user)
 
     return (        
-        <div className="flex flex-col min-h-screen justify-start items-center bg-[#F8F8F8] text-[#000000] gap-[32px]">
+        <div className="flex flex-col min-h-screen justify-start items-center bg-[#F8F8F8] text-blue-900 gap-[32px]">
             <NavBar userId={userId}></NavBar>
 
 
