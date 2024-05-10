@@ -32,10 +32,10 @@
         userId : UUID
     }) => {
         axios.get(
-            process.env.NEXT_PUBLIC_URL + `/user/${data.userId}`,
+            process.env.NEXT_PUBLIC_URL + `/user/get/${data.userId}`,
             {
             headers: {
-                Profileorization: `Bearer ${Cookies.get("token")}`,
+                Authorization: `Bearer ${Cookies.get("token")}`,
             },
             }
         ).then (function (response) {
