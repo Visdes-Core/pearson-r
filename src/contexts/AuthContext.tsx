@@ -81,6 +81,15 @@ import {
         setUserId("00000000-0000-0000-0000-000000000000")
         Cookies.remove("token")
     }
+
+    useEffect(() => {
+        const token = Cookies.get("token")
+
+        if (token || token !== "undefined") {
+            const decodedToken = jwtDecode<{ userId: UUID }>(token!);
+            setUserId(decodedToken.userId)
+        }
+    }),[]
   
     const value = {
       userId,
