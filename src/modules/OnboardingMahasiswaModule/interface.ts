@@ -1,11 +1,11 @@
 export interface OrganisasiInterface {
-    organisasi : String
+    nama_organisasi : String
     jabatan : String
-    awalMasaJabatan : String
-    akhirMasaJabatan : String
+    mulai_masa_jabatan : String
+    akhir_masa_jabatan : String
 }
 export interface PrestasiInterface {
-    prestasi: String
+    nama_pencapaian: String
     tahun: String
     deskripsi: String
 }

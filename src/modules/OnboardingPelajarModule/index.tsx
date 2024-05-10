@@ -1,5 +1,7 @@
 import { Button } from "@/components/button";
+import { useAuthContext } from "@/contexts/AuthContext";
 import { useOnboardingContext } from "@/contexts/OnboardingContext";
+import { UUID } from "crypto";
 import React, { useState } from "react";
 
 function OnboardingPelajarModule() {
@@ -19,6 +21,7 @@ function OnboardingPelajarModule() {
   };
 
   const { roleSiswa } = useOnboardingContext();
+  const { userId } = useAuthContext();
 
   return (
     <div className="flex min-h-screen justify-center items-center bg-[#F8F8F8]">
@@ -30,7 +33,7 @@ function OnboardingPelajarModule() {
         </div>
         <div className="md:px-6 w-full md:w-3/5 py-10 mx-auto flex flex-col items-center justify-center">
           <h2 className="font-bold text-center text-2xl mb-10">Lengkapin profil kamu dulu yuk!</h2>
-          <form onSubmit={ e => {e.preventDefault() ; roleSiswa({nama : nameValue, kelas: kelasValue, preferensi_jurusan: majors})}} className="w-4/5 flex flex-col gap-5 font-semibold">
+          <form onSubmit={ e => {e.preventDefault() ; roleSiswa({id : userId, nama : nameValue, kelas: kelasValue, preferensi_jurusan: majors})}} className="w-4/5 flex flex-col gap-5 font-semibold">
             <div className="flex flex-col gap-2">
               <label htmlFor="nama">Nama</label>
 

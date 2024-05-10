@@ -9,27 +9,30 @@ import axios from "axios"
 
 import { useRouter } from "next/navigation"
 import Cookies from "js-cookie"
+import { UUID } from "crypto"
 
 type OnboardingContextValue = {
     roleSiswa: (data: {
+        id : UUID,
         nama: String
         kelas: String
         preferensi_jurusan: String[]
     }) => void
     roleMahasiswa: (data : {
+        id : UUID,
         nama : String
         asal_universitas : String
         angkatan : String
         jurusan: String
         minat: String[]
         organisasi: {
-            organisasi : String
+            nama_organisasi : String
             jabatan : String
-            awalMasaJabatan : String
-            akhirMasaJabatan : String
+            mulai_masa_jabatan : String
+            akhir_masa_jabatan : String
         }[]
         pencapaian: {
-            prestasi: String
+            nama_pencapaian: String
             tahun: String
             deskripsi: String
         }[]
@@ -45,6 +48,7 @@ export const OnboardingContextProvider = ({ children }: { children: ReactNode })
     const router = useRouter()
 
     const roleSiswa = async (data: {
+        id : UUID,
         nama: String
         kelas: String
         preferensi_jurusan: String[]
@@ -67,7 +71,7 @@ export const OnboardingContextProvider = ({ children }: { children: ReactNode })
         .then(function (response) {
             console.log(response.data);
 
-            router.push('/profile')
+            router.push(`/profile?id=${data.id}`)
         })
         .catch(function (error) {
             console.log(error);
@@ -75,19 +79,20 @@ export const OnboardingContextProvider = ({ children }: { children: ReactNode })
     }
 
     const roleMahasiswa = async (data: {
+        id : UUID,
         nama : String
         asal_universitas : String
         angkatan : String
         jurusan: String
         minat: String[]
         organisasi: {
-            organisasi : String
+            nama_organisasi : String
             jabatan : String
-            awalMasaJabatan : String
-            akhirMasaJabatan : String
+            mulai_masa_jabatan : String
+            akhir_masa_jabatan : String
         }[]
         pencapaian: {
-            prestasi: String
+            nama_pencapaian: String
             tahun: String
             deskripsi: String
         }[]
@@ -114,7 +119,7 @@ export const OnboardingContextProvider = ({ children }: { children: ReactNode })
         .then(function (response) {
             console.log(response.data);
 
-            router.push('/profile')
+            router.push(`/profile?id=${data.id}`)
         })
         .catch(function (error) {
             console.log(error);

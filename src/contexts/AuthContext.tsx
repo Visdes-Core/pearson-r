@@ -12,9 +12,10 @@ import {
   import { useRouter } from "next/navigation"
   import Cookies from "js-cookie"
   import { jwtDecode } from "jwt-decode"
+import { UUID } from "crypto"
   
   type AuthContextValue = {
-    userId: String
+    userId: UUID
     login: (data: {
       email: String
       password: String
@@ -33,7 +34,7 @@ import {
   export const useAuthContext = () => useContext(AuthContext)
   
   export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
-    const [userId, setUserId] = useState<String>("")
+    const [userId, setUserId] = useState<UUID>("00000000-0000-0000-0000-000000000000")
     const router = useRouter()
   
     const login = async (data: {
@@ -47,7 +48,7 @@ import {
         .then(function (response) {
             Cookies.set("token", response.data.token)
 
-            const decodedToken = jwtDecode<{ userId: string }>(response.data.token);
+            const decodedToken = jwtDecode<{ userId: UUID }>(response.data.token);
 
             setUserId(decodedToken.userId)
             console.log(decodedToken.userId)
@@ -80,7 +81,7 @@ import {
     }
 
     const logout = () => {
-        setUserId("")
+        setUserId("00000000-0000-0000-0000-000000000000")
         Cookies.remove("token")
     }
 
@@ -90,7 +91,7 @@ import {
         if (!token || token === "undefined") {
             throw new Error()
         } else {
-            const decodedToken = jwtDecode<{ userId: string }>(token);
+            const decodedToken = jwtDecode<{ userId: UUID }>(token);
             setUserId(decodedToken.userId)
         }
     }),[]
