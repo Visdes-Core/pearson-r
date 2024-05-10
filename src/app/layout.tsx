@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 
 import { Poppins } from 'next/font/google';
 import "./globals.css";
+import { AuthContextProvider } from "@/contexts/AuthContext";
+import { OnboardingContextProvider } from "@/contexts/OnboardingContext";
 
 const poppins = Poppins({
     subsets: ['latin'],
@@ -22,7 +24,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" >
-      <body className={`${poppins.variable} overflow-hidden`}>{children}</body>
+        <OnboardingContextProvider>
+            <AuthContextProvider>
+                <body className={`${poppins.variable}`}>{children}</body>
+            </AuthContextProvider>
+        </OnboardingContextProvider>
     </html>
   );
 }
