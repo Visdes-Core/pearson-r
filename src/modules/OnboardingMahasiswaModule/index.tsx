@@ -3,6 +3,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { OrganisasiInterface, PrestasiInterface } from "./interface";
 import { useOnboardingContext } from "@/contexts/OnboardingContext";
+import { useAuthContext } from "@/contexts/AuthContext";
 
 function OnboardingMahasiswaModule() {
   const [interests, setInterests] = useState<string[]>([])
@@ -14,16 +15,16 @@ function OnboardingMahasiswaModule() {
 
   /** ORGANISASI STATE */
   const [organisasiList, setOrganisasiList] = useState<OrganisasiInterface[]>([])
-  const [organisasi, setOrganisasi] = useState<string>('')
-  const [awalMasaJabatan, setAwalMasaJabatan] = useState<string>('')
-  const [akhirMasaJabatan, setAkhirMasaJabatan] = useState<string>('')
+  const [nama_organisasi, setOrganisasi] = useState<string>('')
+  const [mulai_masa_jabatan, setAwalMasaJabatan] = useState<string>('')
+  const [akhir_masa_jabatan, setAkhirMasaJabatan] = useState<string>('')
   const [jabatan, setJabatan] = useState<string>('')
   const handleSubmitOrg = () => {
     const org = {
-      organisasi,
+      nama_organisasi,
       jabatan,
-      awalMasaJabatan,
-      akhirMasaJabatan,
+      mulai_masa_jabatan,
+      akhir_masa_jabatan,
     }
     setOrganisasiList([...organisasiList, org]);
     setShown('')
@@ -31,12 +32,12 @@ function OnboardingMahasiswaModule() {
   
   /** PENCAPAIAN STATE */
   const [prestasiList, setPrestasiList] = useState<PrestasiInterface[]>([])
-  const [prestasi, setPrestasi] = useState<string>('')
+  const [nama_pencapaian, setPrestasi] = useState<string>('')
   const [tahun, setTahun] = useState<string>('')
   const [deskripsi, setDeskripsi] = useState<string>('')
   const handleSubmitPrestasi = () => {
     const achievement = {
-      prestasi,
+      nama_pencapaian,
       tahun,
       deskripsi
     }
@@ -65,6 +66,7 @@ function OnboardingMahasiswaModule() {
   };
 
   const { roleMahasiswa } = useOnboardingContext();
+  const { userId } = useAuthContext();
 
   return (
     <div className="flex min-h-screen justify-center items-center text-blue-800 bg-[#F8F8F8] py-10">
@@ -76,7 +78,9 @@ function OnboardingMahasiswaModule() {
         </div>
         <div className="md:px-6 w-full md:w-3/5 py-10 mx-auto flex flex-col items-center justify-center">
           <h2 className="font-bold text-center text-2xl mb-10">Lengkapin profil kamu dulu yuk!</h2>
-          <form onSubmit={ e => {e.preventDefault() ; roleMahasiswa({nama : nameValue,
+          <form onSubmit={ e => {e.preventDefault() ; roleMahasiswa({
+            id : userId,
+            nama : nameValue,
             asal_universitas : asalUniversitasValue,
             angkatan : angkatanValue,
             jurusan : jurusanValue,
@@ -141,8 +145,8 @@ function OnboardingMahasiswaModule() {
                 </div>
                 {organisasiList.map((org, index) => (
                     <div key={index} className="w-full flex flex-col border-t-2 py-2 font-medium">
-                        <p className="text-sm text-blue-700">{org.organisasi}</p>
-                        <p className="text-xs text-gray-500">{org.jabatan} | {org.awalMasaJabatan} - {org.akhirMasaJabatan}</p>
+                        <p className="text-sm text-blue-700">{org.nama_organisasi}</p>
+                        <p className="text-xs text-gray-500">{org.jabatan} | {org.mulai_masa_jabatan} - {org.akhir_masa_jabatan}</p>
                     </div>
                 ))}
             </div>
@@ -154,7 +158,7 @@ function OnboardingMahasiswaModule() {
                 </div>
                 {prestasiList.map((prestasi, index) => (
                     <div key={index} className="w-full flex flex-col border-t-2 py-2 font-medium">
-                        <p className="text-sm text-blue-700">{prestasi.prestasi}</p>
+                        <p className="text-sm text-blue-700">{prestasi.nama_pencapaian}</p>
                         <p className="text-xs text-gray-500">{prestasi.tahun}</p>
                         <p className="text-xs text-gray-500">{prestasi.deskripsi}</p>
                     </div>
