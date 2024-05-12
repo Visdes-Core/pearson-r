@@ -27,6 +27,7 @@ import {
         confirmPassword: String
     }) => void
     logout: () => void
+    error: String
   }
   
   const AuthContext = createContext({} as AuthContextValue)
@@ -35,6 +36,7 @@ import {
   
   export const AuthContextProvider = ({ children }: { children: ReactNode }) => {
     const [userId, setUserId] = useState<UUID>("00000000-0000-0000-0000-000000000000")
+    const [error, setError] = useState<String>("")
     const router = useRouter()
   
     const login = async (data: {
@@ -46,6 +48,11 @@ import {
             password: data.password
         })
         .then(function (response) {
+
+            if (response.status !== 200) {
+                setError(response.data)
+            }
+
             Cookies.set("token", response.data.token)
 
             const decodedToken = jwtDecode<{ userId: UUID }>(response.data.token);
@@ -54,7 +61,8 @@ import {
             router.push(`/profile?id=${decodedToken.userId}`)
         })
         .catch(function (error) {
-            console.log(error);
+            console.log(error.response.data.error);
+            setError(error.response.data.error)
         });
     }
 
@@ -73,7 +81,14 @@ import {
             router.push('/login')
         })
         .catch(function (error) {
-            console.log(error);
+            console.log(((error.response.data.details == undefined ) ? false : 
+                error.response.data.details[0].message)|| 
+                error.response.data.error || 
+                error.response.data.message);
+            setError(((error.response.data.details == undefined ) ? false : 
+                error.response.data.details[0].message)|| 
+                error.response.data.error || 
+                error.response.data.message)
         });
     }
 
@@ -95,7 +110,8 @@ import {
       userId,
       login,
       signup,
-      logout
+      logout,
+      error
     }
   
     return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

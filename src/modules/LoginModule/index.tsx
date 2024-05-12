@@ -1,7 +1,9 @@
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/button";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 function LoginModule() {
 
@@ -10,7 +12,12 @@ function LoginModule() {
     const [emailValue, setEmailValue] = useState('');
     const [passwordValue, setPasswordValue] = useState('');
 
-    const { login } = useAuthContext();
+    const { login, error} = useAuthContext();
+
+    useEffect(()=>{
+        if (error != '')
+        toast(error, {hideProgressBar:true});
+    },[error])
 
     return (
     <div className="text-black flex justify-between w-[80%] text-blue-900 min-h-[75vh]">
@@ -40,6 +47,7 @@ function LoginModule() {
           <p className="mt-5">Belum punya akun?  <span onClick={() => {router.push('/signup')}} className="text-[#3469C8] cursor-pointer hover:underline">Register</span></p>
         </div>
       </div>
+      <ToastContainer hideProgressBar/>
     </div>);
 }
 
